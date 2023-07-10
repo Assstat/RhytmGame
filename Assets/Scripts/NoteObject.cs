@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class NoteObject : MonoBehaviour
 {
-    
+
     public bool canBePressed;
-     
+
     public KeyCode keyToPress;
 
     // Start is called before the first frame update
@@ -20,7 +20,7 @@ public class NoteObject : MonoBehaviour
     {
         if (Input.GetKeyDown(keyToPress))
         {
-        if(canBePressed)
+            if (canBePressed)
             {
                 gameObject.SetActive(false);
             }
@@ -35,9 +35,9 @@ public class NoteObject : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Activator")
+        if(other.tag == "Activator")
         {
             canBePressed = false;
         }
     }
-}   
+}

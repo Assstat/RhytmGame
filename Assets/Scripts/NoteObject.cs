@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class NoteObject : MonoBehaviour
@@ -23,6 +24,8 @@ public class NoteObject : MonoBehaviour
             if (canBePressed)
             {
                 gameObject.SetActive(false);
+
+                GameManager.instance.NoteHit();  
             }
         }
     }
@@ -38,6 +41,9 @@ public class NoteObject : MonoBehaviour
         if(other.tag == "Activator")
         {
             canBePressed = false;
+            
+
+            GameManager.instance.NoteMissed();
         }
     }
 }

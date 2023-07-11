@@ -13,7 +13,7 @@ public class NoteObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -25,25 +25,31 @@ public class NoteObject : MonoBehaviour
             {
                 gameObject.SetActive(false);
 
-                GameManager.instance.NoteHit();  
+                GameManager.instance.NoteHit();
+
             }
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Activator")
+        if (other.tag == "Activator")
         {
             canBePressed = true;
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.tag == "Activator")
+        if (gameObject.activeSelf)
         {
-            canBePressed = false;
-            
+            if (other.tag == "Activator")
+            {
 
-            GameManager.instance.NoteMissed();
+
+
+                canBePressed = false;
+
+                GameManager.instance.NoteMissed();
+            }
         }
     }
 }

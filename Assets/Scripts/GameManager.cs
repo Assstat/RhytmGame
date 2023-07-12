@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
-        ScoreText.text = "Score: 0"; 
+        ScoreText.text = "Score: 0";    
         currentMultiplier = 1;
     }
 

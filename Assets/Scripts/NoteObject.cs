@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class NoteObject : MonoBehaviour
@@ -9,6 +6,8 @@ public class NoteObject : MonoBehaviour
     public bool canBePressed;
 
     public KeyCode keyToPress;
+
+    public GameObject goodEffect, perfectEffect, missEffect;
   
 
     // Start is called before the first frame update
@@ -38,12 +37,14 @@ public class NoteObject : MonoBehaviour
                 {
                     Debug.Log("Good Hit");
                     GameManager.instance.GoodHit();
+                    Instantiate(goodEffect, transform.position, goodEffect.transform.rotation);
                 }
 
                 else
                 {
                     Debug.Log("Perfect");
                     GameManager.instance.PerfectHit();
+                    Instantiate(perfectEffect, transform.position, perfectEffect.transform.rotation);
                 }
             }
         }
@@ -67,6 +68,7 @@ public class NoteObject : MonoBehaviour
                 canBePressed = false;
 
                 GameManager.instance.NoteMissed();
+                Instantiate(missEffect, transform.position, missEffect.transform.rotation);
             }
         }
     }

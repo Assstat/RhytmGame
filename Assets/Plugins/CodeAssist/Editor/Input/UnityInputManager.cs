@@ -46,6 +46,7 @@ namespace Meryel.UnityCodeAssist.Editor.Input
             //var reader = new StreamReader(yamlPath);
             var deserializer = new YamlDotNet.Serialization.DeserializerBuilder()
                 .WithTagMapping("tag:unity3d.com,2011:13", typeof(Class13Mapper))
+                .IgnoreUnmatchedProperties()
                 .Build();
             //serializer.Settings.RegisterTagMapping("tag:unity3d.com,2011:13", typeof(Class13));
             //serializer.Settings.ComparerForKeySorting = null;
@@ -225,6 +226,7 @@ namespace Meryel.UnityCodeAssist.Editor.Input
     {
         public int m_ObjectHideFlags { get; set; }
         public int serializedVersion { get; set; }
+        public int m_UsePhysicalKeys { get; set; }
         public List<InputAxisMapper>? m_Axes { get; set; }
     }
 
@@ -260,6 +262,12 @@ namespace Meryel.UnityCodeAssist.Editor.Input
         {
             get { return map.serializedVersion; }
             set { map.serializedVersion = value; }
+        }
+
+        public bool UsePhysicalKeys
+        {
+            get { return map.m_UsePhysicalKeys != 0; }
+            set { map.m_UsePhysicalKeys = value ? 1 : 0; }
         }
 
         /*public List<InputAxisMapper> Axes

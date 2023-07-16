@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -36,32 +37,32 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         instance = this;
 
-        ScoreText.text = "Score: 0";    
+        ScoreText.text = "Score: 0";
         currentMultiplier = 1;
 
         totalNotes = FindObjectsOfType<NoteObject>().Length;
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!startPlaying)
+        if (!startPlaying)
         {
-            if(Input.anyKeyDown)
+            if (Input.anyKeyDown)
             {
                 startPlaying = true;
                 theBS.hasStarted = true;
-                
+
                 theMusic.Play();
             }
         }
         else
         {
-            if(!theMusic.isPlaying && !resultsScreen.activeInHierarchy)
+            if (!theMusic.isPlaying && !resultsScreen.activeInHierarchy)
             {
                 resultsScreen.SetActive(true);
 
@@ -76,14 +77,14 @@ public class GameManager : MonoBehaviour
                 percentHitText.text = percentHit.ToString("F1") + "%";
 
                 string rankVal = "F";
-                if(percentHit > 40)
+                if (percentHit > 40)
                 {
                     rankVal = "D";
-                    if(percentHit > 55)
+                    if (percentHit > 55)
                     {
 
                         rankVal = "C";
-                        if(percentHit > 70)
+                        if (percentHit > 70)
                         {
 
                             rankVal = "B";
@@ -91,13 +92,13 @@ public class GameManager : MonoBehaviour
                             {
 
                                 rankVal = "A";
-                                if(percentHit > 95)
+                                if (percentHit > 95)
                                 {
                                     rankVal = "S";
                                 }
                             }
                         }
-                        
+
                     }
                 }
 
@@ -105,6 +106,9 @@ public class GameManager : MonoBehaviour
                 finalScoreText.text = currentScore.ToString();
             }
         }
+
+        if (Input.GetKey(KeyCode.R))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void NoteHit()
     {
@@ -160,3 +164,4 @@ public class GameManager : MonoBehaviour
         missedHits++;
     }
 }
+
